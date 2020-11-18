@@ -12,14 +12,13 @@ namespace MVCDapperCRUD.Models
     {
         private static string connectionString = @"Data Source=desktop-ig6tgp2\sqlexpress;Initial Catalog = DapperDB; Integrated Security = True";
 
-        public static void ExecuteWithoutReturn(string procedureName, DynamicParameters param = null)
+        public static void ExecuteWithoutReturn(string sql, DynamicParameters param = null)
         {
             using (SqlConnection sqlCon = new SqlConnection(connectionString))
             {
                 sqlCon.Open();
-                sqlCon.Execute(procedureName, param, commandType: CommandType.StoredProcedure);
+                sqlCon.Execute(sql, param);
             };
-
         }
 
         public static T ExcecuteReturnScalar<T>(string procedureName, DynamicParameters param = null)
@@ -27,7 +26,7 @@ namespace MVCDapperCRUD.Models
             using( SqlConnection sqlCon = new SqlConnection(connectionString))
             {
                 sqlCon.Open();
-                return (T)Convert.ChangeType(sqlCon.ExecuteScalar(procedureName, param, commandType:
+                return (T)Convert.ChangeType(sqlCon.ExecuteScalar(pocedureName, param, commandType:
                     CommandType.StoredProcedure), typeof(T)); 
             }
         }
@@ -40,5 +39,6 @@ namespace MVCDapperCRUD.Models
                 return sqlCon.Query<T>(procedureName, param, commandType: CommandType.StoredProcedure);
             }
         }
+        
     } 
 }

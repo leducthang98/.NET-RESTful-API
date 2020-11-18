@@ -9,8 +9,7 @@ using Dapper;
 
 namespace MVCDapperCRUD.Controllers
 {
-    public class EmployeeController : Controller
-    {
+    public class EmployeeController : Controller{
         public IActionResult Index()
         {
             return View(DapperORM.ExecuteReturnList<EmployeeModel>("EmployeeViewAll",null));
